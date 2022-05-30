@@ -51,7 +51,7 @@ function displayJsonToHtmlTable(jsonData){
     var avg_element=document.getElementById("avg");
     var avg_numerator=0.0,avg_denominator=0.0,avg=0.0;
     if(jsonData.length>0){
-        var htmlData='<tr><th>id_subject</th><th>Name_subject</th><th>TC</th><th>score_10</th><th>word</th><th>score_4</th></tr>';
+        var htmlData='<tr><th>id_subject</th><th>Name_subject</th><th>TC</th><th>score_10</th><th>word</th><th>score_4</th><th>disable</th></tr>';
         for(var i=0;i<jsonData.length;i++){
             var row=jsonData[i];
             var score4 =convertScore4(row["score_10"]);
@@ -59,7 +59,9 @@ function displayJsonToHtmlTable(jsonData){
             avg_denominator += parseFloat(row["TC"]);
             htmlData+='<tr><td>'+row["id_subject"]+'</td><td>'+row["Name_subject"]
                   +'</td><td>'+row["TC"]+'</td>'+`<td><input onkeyup="editScore('${row["id_subject"]}')" class="form-control"  type="text" id="${row["id_subject"]}" value="${row["score_10"]}" />`+
-                  '</td><td>'+score4.word+'</td><td>'+score4.number+'</td></tr>'
+                  '</td><td>'+score4.word+'</td><td>'+score4.number+'</td>'+
+                  `<td><button class="btn btn-light" onclick="editScore('${row["id_subject"]}','1')"></button></td>`+
+                  '</tr>'
 
                   ;
         }
@@ -112,17 +114,29 @@ function convertScore4(score){
     }                    
     return score4
 }
-function abcd(){
-    console.log(backup);
+function back(){
+
     displayJsonToHtmlTable(backup);
 }
 
-function editScore(id){
+function editScore(id,check){
+
     var temp = document.querySelector("#"+id)
     var index = edit.findIndex( x => x.id_subject === id );
-    edit[index]["score_10"] = parseFloat(temp.value);
 
-    if(temp.value.length==3){
+    if (check == 1){
+        var tc = backup[index].TC;
+        if(edit[index].TC>0){
+            edit[index].TC = 0;
+        }
+        else{
+            edit[index].TC = tc;
+        }
+    }
+
+    edit[index]["score_10"] = parseFloat(temp.value);
+    
+    if(temp.value.length == 3 || check==1){
 
         displayJsonToHtmlTable(edit);
     }
