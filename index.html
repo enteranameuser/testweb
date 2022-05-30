@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .table {
+        margin: auto;
+        width: 80% !important; 
+        }
+
+        .container {
+            text-align: center;
+        }
+        .form-control{
+            width: 100% !important;
+            margin: auto;
+        }
+        .center {
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h3>Upload an excel file to display in HTML Table</h3>
+        <!-- Input element to upload an excel file -->
+        <table class="center">
+            <tr>
+                <td  > 
+                <input class="form-control"  type="file" id="file_upload" />
+                </td>
+                <td  >
+                <button class="btn btn-dark" onclick="upload()">Upload</button> 
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div  class="container" id="scroll">
+        <br>
+        <h2 id="avg"></h2>
+        <button  class="btn btn-dark" onclick="abcd()">Trở về</button> 
+    </div>    
+    <br><br>
+    <!-- table to display the excel data -->
+    <table class="table table-dark table-sm table-bordered table-hover " id="display_excel_data"> </table>
+   
+    <br>
+</body>
+<script src="./func.js">
+
+</script>  
+</html>
